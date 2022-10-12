@@ -23,12 +23,18 @@ namespace HealthSystemProject2022
         static string healthStatus;
 
 
+        //Enemie Values
+
+      
+
+        //Main program
         static void Main(string[] args)
         {
+            HUDResetValues();
+            healthStatusCheck();
             ShowHUD();
-        }
 
-        
+        }
 
 
 
@@ -36,8 +42,8 @@ namespace HealthSystemProject2022
 
         static void ShowHUD()
         {
-            Console.WriteLine("");
-            Console.WriteLine("");
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("=========================================");
             Console.WriteLine("========== Here are your stats ==========");
             Console.WriteLine("=========================================");
@@ -50,15 +56,28 @@ namespace HealthSystemProject2022
             Console.WriteLine("=          Score Multiplier: " +  scoreMultiplier);
             Console.WriteLine("=                                       =");
             Console.WriteLine("=========================================");
+            Console.WriteLine();
+            Console.WriteLine();
 
 
             Console.ReadKey();
         }
 
 
+        //HUD reset vaules quick command
 
+        static void HUDResetValues()
+        {
+            health = 100;
+            shield = 100;
+            lives = 3;
+            score = 0;
+            scoreMultiplier = 1;
+        }
+
+        
+        
         //Health Status Check System
-
 
         static void healthStatusCheck()
         {
@@ -94,7 +113,30 @@ namespace HealthSystemProject2022
                 
             
         }
+            
+        
+       //Enemie hit functions 
 
+       static void enemieHitPlayerFunctions(int enemieDamage)
+        {
+            if (shield > 0)
+            {
+                shield = shield - enemieDamage;
+
+                if (shield < 0)
+                {
+                    health = health + shield;
+                    shield = 0;
+                }
+            }
+
+            else if (shield == 0)
+            {
+                health = health - enemieDamage;
+            }
+
+
+        }
 
         
 
