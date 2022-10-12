@@ -33,6 +33,7 @@ namespace HealthSystemProject2022
             HUDResetValues();
             healthStatusCheck();
             ShowHUD();
+            
 
         }
 
@@ -68,9 +69,9 @@ namespace HealthSystemProject2022
 
         static void HUDResetValues()
         {
-            health = 100;
+            health = 0;
             shield = 100;
-            lives = 3;
+            lives = 0;
             score = 0;
             scoreMultiplier = 1;
         }
@@ -86,17 +87,17 @@ namespace HealthSystemProject2022
                 healthStatus = "Full Health";
             }
 
-            else if (health >= 76 && health <=99)
+            else if (health >= 76 && health <= 99)
             {
                 healthStatus = "Good Health";
             }
 
-            else if (health >= 51 && health <=75)
+            else if (health >= 51 && health <= 75)
             {
                 healthStatus = "Okay Health";
             }
 
-            else if (health >= 26 && health <=50)
+            else if (health >= 26 && health <= 50)
             {
                 healthStatus = "Damaged";
             }
@@ -110,7 +111,8 @@ namespace HealthSystemProject2022
             {
                 healthStatus = "=== !!!CRITICAL!!! ===";
             }
-                
+
+            deathcheck();
             
         }
             
@@ -138,6 +140,51 @@ namespace HealthSystemProject2022
 
         }
 
+
+        static void deathcheck()
+        {
+            if (health == 0)
+            {
+                lives = lives - 1; 
+                
+                if (lives < 0)
+                {
+                    lives = 0;
+                }
+            
+
+            }
+
+            if (lives == 0)
+            {
+                gameOverScreen();
+            }
+
+        }
+        
+        static void gameOverScreen()
+        {
+            Console.WriteLine("          ===============");
+            Console.WriteLine("        ===================");
+            Console.WriteLine("       =====================");
+            Console.WriteLine("      =======================");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     ========= R.I.P =========");
+            Console.WriteLine("     ===-----Game Over-----===");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     === Please restart to ===");
+            Console.WriteLine("     ====== play again. ======");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     =========================");
+            Console.WriteLine("     =========================");
+
+            Console.ReadKey(true);
+
+        }
         
 
 
