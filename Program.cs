@@ -69,9 +69,9 @@ namespace HealthSystemProject2022
 
         static void HUDResetValues()
         {
-            health = 0;
+            health = 100;
             shield = 100;
-            lives = 0;
+            lives = 3;
             score = 0;
             scoreMultiplier = 1;
         }
