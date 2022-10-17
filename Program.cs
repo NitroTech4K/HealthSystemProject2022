@@ -31,10 +31,11 @@ namespace HealthSystemProject2022
         static void Main(string[] args)
         {
             HUDResetValues();
-            healthStatusCheck();
-            ShowHUD();
             
-
+            ShowHUD();
+            TakeDamage(-190);
+            
+            ShowHUD();
         }
 
 
@@ -48,7 +49,7 @@ namespace HealthSystemProject2022
             Console.WriteLine("=========================================");
             Console.WriteLine("========== Here are your stats ==========");
             Console.WriteLine("=========================================");
-            Console.WriteLine("=             " + healthStatus + "           ");
+            Console.WriteLine("=         " + healthStatus + "           ");
             Console.WriteLine("=                                        ");
             Console.WriteLine("=      Health: " + health + "            Shield: " + shield);
             Console.WriteLine("=                                       =");
@@ -74,6 +75,8 @@ namespace HealthSystemProject2022
             lives = 3;
             score = 0;
             scoreMultiplier = 1;
+
+            healthStatusCheck();
         }
 
         
@@ -119,24 +122,40 @@ namespace HealthSystemProject2022
         
        //Enemie hit functions 
 
-       static void enemieHitPlayerFunctions(int enemieDamage)
+       static void TakeDamage(int damage)
         {
-            if (shield > 0)
+            if (damage > 0)
             {
-                shield = shield - enemieDamage;
-
-                if (shield < 0)
+                if (shield > 0)
                 {
-                    health = health + shield;
-                    shield = 0;
+                    shield = shield - damage;
+
+                    if (shield < 0)
+                    {
+                        health = health + shield;
+                        shield = 0;
+                    }
                 }
+
+                else if (shield == 0)
+                {
+                    health = health - damage;
+                }
+
+                healthStatusCheck();
             }
+           
 
             else if (shield == 0)
             {
-                health = health - enemieDamage;
+                health = health - damage;
             }
 
+            if (damage < 0)
+            {
+                Console.WriteLine("ERROR! The enemieDamage value you set is " + damage + ". Damage values cannot be in negative values. " +
+                    "Set the damage to how much damage the player is taking, NOT how much health is being lost. :)");
+            }
 
         }
 
