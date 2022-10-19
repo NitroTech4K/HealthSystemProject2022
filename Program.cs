@@ -23,18 +23,25 @@ namespace HealthSystemProject2022
         static string healthStatus;
 
 
-        //Enemie Values
 
+
+        //Enemie Values
       
 
         //Main program
         static void Main(string[] args)
         {
-            HUDResetValues();
-            
+            FullHUDReset();
+
+            TakeDamage(200);
+
+            deathcheck();
+
             ShowHUD();
-            TakeDamage(-190);
-            
+
+            Medkit(100);
+            shieldcell(100);
+
             ShowHUD();
         }
 
@@ -44,6 +51,9 @@ namespace HealthSystemProject2022
 
         static void ShowHUD()
         {
+
+            healthStatusCheck();
+
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("=========================================");
@@ -68,7 +78,7 @@ namespace HealthSystemProject2022
 
         //HUD reset vaules quick command
 
-        static void HUDResetValues()
+        static void FullHUDReset()
         {
             health = 100;
             shield = 100;
@@ -114,12 +124,48 @@ namespace HealthSystemProject2022
             {
                 healthStatus = "=== !!!CRITICAL!!! ===";
             }
-
-            deathcheck();
-            
         }
-            
-        
+
+        //Medkits and shield kits
+
+        static void Medkit(int heal)
+        {
+            health = health + heal;
+
+            if (heal < 0)
+            {
+                heal = 0;
+                Console.WriteLine("Cannot heal health with negative values! You're looking for damage. :)");
+            }
+
+            if (health > 100)
+            {
+                health = 100;
+            }
+        }
+
+        static void shieldcell(int charge)
+        {
+            shield = shield + charge;
+
+            if (charge < 0)
+            {
+                charge = 0;
+                Console.WriteLine("Cannot charge shields with negative values! You're looking for damage. :)");
+            }
+
+            if (shield > 100)
+            {
+                shield = 100;
+            }
+        }
+
+
+
+
+
+
+
        //Enemie hit functions 
 
        static void TakeDamage(int damage)
@@ -159,28 +205,42 @@ namespace HealthSystemProject2022
 
         }
 
+        
 
+
+
+        //Check if dead
         static void deathcheck()
         {
             if (health == 0)
             {
                 lives = lives - 1; 
                 
-                if (lives < 0)
-                {
-                    lives = 0;
-                }
-            
+                healthShieldReset();
+            }
 
+            if (lives < 0)
+            {
+                lives = 0;
+                Console.WriteLine("ERROR! Lives cannot equal negative values. When you're dead, you're DEAD! :)");
             }
 
             if (lives == 0)
             {
                 gameOverScreen();
             }
-
         }
-        
+
+
+        //Health & Shield Reset.
+
+        static void healthShieldReset()
+        {
+            health = 100;
+            shield = 100;
+        }
+
+        //Game over
         static void gameOverScreen()
         {
             Console.WriteLine("          ===============");
