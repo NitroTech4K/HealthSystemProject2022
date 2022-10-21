@@ -163,6 +163,8 @@ namespace HealthSystemProject2022
             {
                 health = 100;
             }
+
+            Console.WriteLine("== Player healed " + heal + "health. ==");
         }
 
         static void shieldcell(int charge)
@@ -182,6 +184,8 @@ namespace HealthSystemProject2022
             {
                 shield = 100;
             }
+
+            Console.WriteLine("== Player shields charged by " + charge + " shield points ==" );
         }
 
 
@@ -216,6 +220,8 @@ namespace HealthSystemProject2022
                 }
 
                 healthStatusCheck();
+
+                Console.WriteLine("== Player took " + damage + " damage. ==");
             }
            
 
