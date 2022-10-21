@@ -33,16 +33,34 @@ namespace HealthSystemProject2022
         {
             FullHUDReset();
 
-            TakeDamage(200);
+            deathcheck();
+
+            ShowHUD();
+
+
+            TakeDamage(50);
 
             deathcheck();
 
             ShowHUD();
 
+
+
+            TakeDamage(100);
+
+            deathcheck();
+
+            ShowHUD();
+
+
             Medkit(100);
             shieldcell(100);
 
+            deathcheck();
+
             ShowHUD();
+
+
         }
 
 
@@ -130,6 +148,9 @@ namespace HealthSystemProject2022
 
         static void Medkit(int heal)
         {
+
+            Console.WriteLine("== Player is about to heal " + heal + " health. ==");
+
             health = health + heal;
 
             if (heal < 0)
@@ -146,6 +167,9 @@ namespace HealthSystemProject2022
 
         static void shieldcell(int charge)
         {
+
+            Console.WriteLine("== Player is about to charge " + charge + " shield points. ==");
+
             shield = shield + charge;
 
             if (charge < 0)
@@ -170,6 +194,9 @@ namespace HealthSystemProject2022
 
        static void TakeDamage(int damage)
         {
+
+            Console.WriteLine("== Player is about to take " + damage + " damage. ==");
+
             if (damage > 0)
             {
                 if (shield > 0)
